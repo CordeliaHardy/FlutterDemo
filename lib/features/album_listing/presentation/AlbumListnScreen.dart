@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:FlutterDemo/core/utils/testing_key_app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,12 +38,12 @@ class _AlbumListingScreenState extends State<AlbumListingScreen> {
           if (state is AlbumListFetchedState) {}
           return Column(
             children: [
-
-              SizedBox(height: 20.h,),
+              SizedBox(
+                height: 20.h,
+              ),
               TextField(
-                decoration: const InputDecoration(
-                    hintText: 'Search Album Here'
-                ),
+                decoration:
+                    const InputDecoration(hintText: 'Search Album Here'),
                 controller: controller,
                 onChanged: (value) {
                   if (_debounce?.isActive ?? false) _debounce!.cancel();
@@ -53,9 +54,12 @@ class _AlbumListingScreenState extends State<AlbumListingScreen> {
                   });
                 },
               ),
-              SizedBox(height: 20.h,),
+              SizedBox(
+                height: 20.h,
+              ),
               Expanded(
                 child: ListView.builder(
+                  key: const Key(ALBUM_LISTING_LISTVIEW_PROVIDER),
                   itemBuilder: (_, index) {
                     AlbumModel model = _buildListAlbum()[index];
                     return GestureDetector(

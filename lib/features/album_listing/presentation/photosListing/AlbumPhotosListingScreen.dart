@@ -1,3 +1,4 @@
+import 'package:FlutterDemo/core/utils/testing_key_app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,6 +33,7 @@ class _AlbumPhotosListingScreenState extends State<AlbumPhotosListingScreen> {
         builder: (context, state) {
           if (state is AlbumPhotosFetchingState) {
             return ListView.builder(
+              key: const Key(ALBUM_PHOTOS_LISTING_LISTVIEW_PROVIDER),
               itemBuilder: (_, index) {
                 AlbumPhotoModel model = state.listAlbumPhotos[index];
                 return GestureDetector(
