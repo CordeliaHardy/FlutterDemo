@@ -14,3 +14,11 @@ abstract class AlbumRepository extends BaseApiRepo {
   Future<Either<FailureModel, List<AlbumPhotoModel>>> fetchAlbumPhotos(
       int albumId);
 }
+
+abstract class TestAbstract {
+  Future<Either<FailureModel, List<AlbumModel>>> fetchAlbumList(
+      String? albumSearch);
+
+  Future<Either<FailureModel, List<AlbumPhotoModel>>> fetchAlbumPhotos(
+      int albumId);
+}

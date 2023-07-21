@@ -1,3 +1,5 @@
+import 'package:FlutterDemo/features/auth_check/auth_repository.dart';
+import 'package:FlutterDemo/features/auth_check/auth_repository_impl.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -14,6 +16,7 @@ import 'package:FlutterDemo/features/album_listing/domain/usecases/album_listing
 import 'package:FlutterDemo/features/album_listing/domain/usecases/album_photos_listing_usecase.dart';
 
 final sl = GetIt.instance;
+
 Future<void> initInjectionContainer(bool isProd) async {
   //Preference Helper
 
@@ -26,7 +29,7 @@ Future<void> initInjectionContainer(bool isProd) async {
   sl.registerSingleton<Dio>(dio);
   sl.registerLazySingleton(() => Connectivity());
   sl.registerLazySingleton<IRemoteDataSource>(
-          () => RemoteDataSourceImpl(dio: sl()));
+      () => RemoteDataSourceImpl(dio: sl()));
 
   sl.registerSingleton<AlbumDataSource>(
       AlbumDataSourceImpl(remoteDataSource: sl()));
@@ -34,4 +37,6 @@ Future<void> initInjectionContainer(bool isProd) async {
       AlbumsRepositoryImpl(networkInfo: sl(), albumDataSource: sl()));
   sl.registerLazySingleton(() => AlbumListingUseCase(sl()));
   sl.registerLazySingleton(() => AlbumPhotosUseCase(sl()));
+
+  sl.registerSingleton<AuthRepository>(AuthrepositoryImpl());
 }
